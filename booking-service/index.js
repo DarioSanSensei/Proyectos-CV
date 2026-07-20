@@ -39,6 +39,10 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(PORT, () => {
-    console.log(`[Booking Service] operando en el puerto ${PORT} con Sockets 🚀`);
-});
+if (require.main === module) {
+    server.listen(PORT, () => {
+        console.log(`[Booking Service] operando en el puerto ${PORT} con Sockets ⚡`);
+    });
+}
+
+module.exports = { app, server };

@@ -57,6 +57,10 @@ app.get('/health', (req, res) => {
     res.status(200).json({ status: 'OK', service: 'Catalog Service Running on port 3002' });
 });
 
-app.listen(PORT, () => {
-    console.log(`[Catalog Service] operando en el puerto ${PORT}`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`[Catalog Service] operando en el puerto ${PORT}`);
+    });
+}
+
+module.exports = app;

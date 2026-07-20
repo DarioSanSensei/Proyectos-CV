@@ -48,7 +48,11 @@ app.get('/health', (req, res) => {
     res.status(200).json({ status: 'OK', service: 'Auth Service Running' });
 });
 
-app.listen(PORT, () => {
-    console.log(`[Auth Service] operando en el puerto ${PORT}`);
-    console.log(`👁️  Interfaz gráfica disponible en: http://localhost:${PORT}/api-docs`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`[Auth Service] operando en el puerto ${PORT}`);
+        console.log(`🎥  Interfaz gráfica disponible en: http://localhost:${PORT}/api-docs`);
+    });
+}
+
+module.exports = app;

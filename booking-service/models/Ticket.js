@@ -54,4 +54,13 @@ const ticketSchema = new mongoose.Schema({
     }
 }, { timestamps: true, versionKey: false });
 
+// Índice compuesto único para evitar doble reserva del mismo asiento en la misma función
+ticketSchema.index(
+    { movieId: 1, showtime: 1, room: 1, seatNumber: 1 },
+    { 
+        unique: true, 
+        partialFilterExpression: { status: 'CONFIRMADO' } 
+    }
+);
+
 module.exports = mongoose.model('Ticket', ticketSchema);
