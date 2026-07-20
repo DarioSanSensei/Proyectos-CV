@@ -1,13 +1,14 @@
 require('dotenv').config();
 const { Client } = require('pg');
+const bcrypt = require('bcrypt');
 
 async function setupDatabase() {
     // 1. Conexión a la base maestra para crear cinema_db
     const clientDefault = new Client({
-        user: process.env.DB_USER,
+        user: process.env.DB_USER || 'postgres',
         password: process.env.DB_PASSWORD,
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
+        host: process.env.DB_HOST || 'localhost',
+        port: process.env.DB_PORT || 5432,
         database: 'postgres' // Nos conectamos a la BD por defecto de instalación
     });
 
@@ -31,11 +32,11 @@ async function setupDatabase() {
 
     // 2. Conexión a la nueva BD para forjar la tabla de usuarios
     const clientCinema = new Client({
-        user: process.env.DB_USER,
+        user: process.env.DB_USER || 'postgres',
         password: process.env.DB_PASSWORD,
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        database: process.env.DB_NAME // Ahora sí usamos cinema_db
+        host: process.env.DB_HOST || 'localhost',
+        port: process.env.DB_PORT || 5432,
+        database: 'cinema_db'
     });
 
     try {
