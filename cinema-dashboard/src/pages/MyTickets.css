@@ -1,0 +1,570 @@
+/* ============================================
+   MYTICKETS — CinePuntos Loyalty Profile
+============================================ */
+.mt-page { padding-top: 90px; min-height: 100vh; }
+
+.mt-container { max-width: 1100px; margin: 0 auto; padding: 0 30px 80px; }
+
+/* === Profile Panel === */
+.mt-profile-panel {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  background: var(--dark-card);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 32px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mt-profile-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #E31E24, #FF6B6B, #E31E24);
+}
+
+.mt-profile-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 0 0 auto;
+}
+
+.mt-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid;
+  background: var(--dark-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.mt-profile-email {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.mt-tier-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  border: 1px solid;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.mt-tier-perks {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  max-width: 220px;
+}
+
+.mt-profile-right {
+  flex: 1;
+  border-left: 1px solid var(--glass-border);
+  padding-left: 40px;
+}
+
+.mt-points-display {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.mt-points-number {
+  font-size: 3rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.mt-points-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mt-progress-section { margin-bottom: 20px; }
+
+.mt-progress-bar {
+  height: 8px;
+  background: var(--dark-surface);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.mt-progress-fill {
+  height: 100%;
+  border-radius: 50px;
+  transition: width 0.8s ease;
+}
+
+.mt-stats-row {
+  display: flex;
+  gap: 30px;
+}
+
+.mt-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mt-stat-val {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.mt-stat-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* === Redeem Banner === */
+.mt-redeem-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255,140,0,0.04));
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 16px;
+  padding: 20px 28px;
+  margin-bottom: 40px;
+}
+
+.mt-redeem-banner h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--gold);
+}
+
+.mt-redeem-banner p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.mt-redeem-btn {
+  padding: 10px 22px;
+  border-radius: 50px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: not-allowed;
+  white-space: nowrap;
+}
+
+/* === Header === */
+.mt-header { margin-bottom: 30px; }
+
+.mt-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.mt-header p { color: var(--text-secondary); font-size: 1rem; }
+
+/* === Grid de boletos === */
+.mt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 24px;
+}
+
+.mt-ticket-card {
+  display: flex;
+  background: var(--dark-card);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  position: relative;
+}
+
+.mt-ticket-card::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 140px;
+  transform: translateY(-50%);
+  width: 2px; height: calc(100% - 40px);
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 5px, transparent 5px, transparent 10px);
+  z-index: 10;
+}
+
+.mt-ticket-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(227, 30, 36, 0.35);
+}
+
+.mt-ticket-poster {
+  width: 140px; flex-shrink: 0; position: relative;
+}
+
+.mt-ticket-poster img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(0.2) brightness(0.8);
+}
+
+.mt-ticket-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, transparent, var(--dark-card));
+}
+
+.mt-ticket-info {
+  flex: 1; padding: 20px;
+  display: flex; flex-direction: column;
+}
+
+.mt-ticket-top { flex-grow: 1; }
+
+.mt-eyebrow {
+  font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--primary); margin-bottom: 4px; display: block;
+}
+
+.mt-title {
+  font-size: 1.2rem; font-weight: 700;
+  line-height: 1.2; margin-bottom: 14px;
+  color: var(--text-primary);
+}
+
+.mt-ticket-details { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 12px; }
+
+.mt-detail-block { display: flex; flex-direction: column; gap: 3px; }
+
+.mt-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+.mt-value { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+
+.mt-value.highlight { color: var(--primary); font-weight: 800; font-size: 1.2rem; }
+
+/* === Combo y Puntos Tags === */
+.mt-combo-tag {
+  font-size: 0.75rem; color: #FF8C00;
+  background: rgba(255,140,0,0.1); border: 1px solid rgba(255,140,0,0.2);
+  border-radius: 6px; padding: 4px 10px; margin-bottom: 6px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.mt-points-earned {
+  font-size: 0.75rem; color: var(--gold);
+  background: rgba(255, 215, 0, 0.08); border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 6px; padding: 4px 10px; margin-bottom: 8px;
+}
+
+/* === Barcode === */
+.mt-ticket-barcode {
+  border-top: 1px dashed rgba(255,255,255,0.1);
+  padding-top: 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+
+.mt-barcode-lines {
+  height: 24px; width: 100%;
+  background: repeating-linear-gradient(to right,
+    var(--text-secondary) 0, var(--text-secondary) 3px,
+    transparent 3px, transparent 5px,
+    var(--text-secondary) 5px, var(--text-secondary) 6px,
+    transparent 6px, transparent 10px
+  );
+  opacity: 0.4;
+}
+
+.mt-ticket-id { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 2px; }
+
+/* === Empty & Loader === */
+.mt-empty-state {
+  text-align: center; padding: 80px 20px;
+  background: var(--dark-surface); border-radius: 24px;
+  border: 1px dashed rgba(255,255,255,0.1);
+}
+
+.mt-empty-state .empty-icon { font-size: 4rem; margin-bottom: 20px; opacity: 0.4; }
+.mt-empty-state h2 { font-size: 1.8rem; margin-bottom: 12px; }
+.mt-empty-state p { color: var(--text-secondary); margin-bottom: 30px; }
+.mt-empty-state .cp-btn-primary, .mt-empty-state button {
+  padding: 12px 30px; background: linear-gradient(135deg, #E31E24, #B01219);
+  color: white; border: none; border-radius: 50px; font-weight: 700; cursor: pointer;
+}
+
+.mt-loader-container {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; height: 100vh; color: var(--primary); gap: 16px;
+}
+
+.mt-loader {
+  width: 40px; height: 40px;
+  border: 3px solid rgba(227, 30, 36, 0.2);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: mt-spin 1s linear infinite;
+}
+
+.mt-error {
+  background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+  color: #ef4444; padding: 16px; border-radius: 10px; margin-bottom: 20px;
+}
+
+@keyframes mt-spin { to { transform: rotate(360deg); } }
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .mt-profile-panel { flex-direction: column; }
+  .mt-profile-right { border-left: none; border-top: 1px solid var(--glass-border); padding-left: 0; padding-top: 20px; }
+  .mt-grid { grid-template-columns: 1fr; }
+  .mt-ticket-card { flex-direction: column; }
+  .mt-ticket-poster { width: 100%; height: 140px; }
+  .mt-ticket-overlay { background: linear-gradient(to bottom, transparent, var(--dark-card)); }
+  .mt-ticket-card::before { top: 140px; left: 20px; width: calc(100% - 40px); height: 2px; }
+  .mt-redeem-banner { flex-direction: column; gap: 16px; align-items: flex-start; }
+}
+
+
+.mt-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+.mt-header {
+  margin-bottom: 50px;
+}
+
+.mt-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.mt-header p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.mt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 40px;
+}
+
+.mt-ticket-card {
+  display: flex;
+  background: var(--dark-card);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  position: relative;
+}
+
+.mt-ticket-card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 140px;
+  transform: translateY(-50%);
+  width: 2px;
+  height: calc(100% - 40px);
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 5px, transparent 5px, transparent 10px);
+  z-index: 10;
+}
+
+.mt-ticket-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.mt-ticket-poster {
+  width: 140px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.mt-ticket-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.2) brightness(0.8);
+}
+
+.mt-ticket-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent, var(--dark-card));
+}
+
+.mt-ticket-info {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mt-ticket-top {
+  flex-grow: 1;
+}
+
+.mt-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.mt-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.mt-ticket-details {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 24px;
+}
+
+.mt-detail-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mt-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mt-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mt-value.highlight {
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 1.4rem;
+}
+
+.mt-ticket-barcode {
+  border-top: 1px dashed rgba(255,255,255,0.1);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.mt-barcode-lines {
+  height: 30px;
+  width: 100%;
+  background: repeating-linear-gradient(to right, 
+    var(--text-secondary) 0, var(--text-secondary) 3px, 
+    transparent 3px, transparent 5px, 
+    var(--text-secondary) 5px, var(--text-secondary) 6px, 
+    transparent 6px, transparent 10px
+  );
+  opacity: 0.6;
+}
+
+.mt-ticket-id {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+}
+
+.mt-empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  background: var(--dark-surface);
+  border-radius: 24px;
+  border: 1px dashed rgba(255,255,255,0.1);
+}
+
+.mt-empty-state .empty-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.mt-empty-state h2 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.mt-empty-state p {
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+}
+
+.mt-loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: var(--gold);
+}
+
+.mt-loader {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(212, 175, 55, 0.2);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: mt-spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes mt-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .mt-grid { grid-template-columns: 1fr; }
+  .mt-ticket-card { flex-direction: column; }
+  .mt-ticket-poster { width: 100%; height: 160px; }
+  .mt-ticket-overlay { background: linear-gradient(to bottom, transparent, var(--dark-card)); }
+  .mt-ticket-card::before {
+    top: 160px; left: 20px; width: calc(100% - 40px); height: 2px;
+    background: repeating-linear-gradient(to right, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 5px, transparent 5px, transparent 10px);
+  }
+}
